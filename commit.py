@@ -1,13 +1,15 @@
 import random
 from datetime import datetime
+from pathlib import Path
 
-# File to modify
-FILE = "activity.log"
+FILE = Path("activity.log")
 
-# Random number of commits per day
+# Ensure file exists
+FILE.touch(exist_ok=True)
+
 commit_count = random.randint(1, 7)
 
-with open(FILE, "a") as f:
+with FILE.open("a") as f:
     for i in range(commit_count):
         f.write(f"{datetime.utcnow().isoformat()} | Commit {i+1}\n")
 
